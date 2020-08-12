@@ -792,18 +792,26 @@ class SeedDMS_View_MyDocuments extends SeedDMS_Bootstrap_Style {
 				//print "<th><a href=\"../out/out.MyDocuments.php?orderby=e\">".getMLText("expires")."</a></th>\n";
 				print "</tr>\n</thead>\n<tbody>\n";
 
-				$previewer = new SeedDMS_Preview_Previewer($cachedir, $previewwidth, $timeout);
+				$docNumbers = array();
 				foreach ($resArr as $res) {
 					$document = $dms->getDocument($res["documentID"]);
+					$docNumParts = explode("-", $document->getDocNum());
+					$docNumbers[] = sprintf ("%s-%05d", $docNumParts[0], $docNumParts[1]);
+					}
+				$previewer = new SeedDMS_Preview_Previewer($cachedir, $previewwidth, $timeout);
+				asort($docNumbers);
+				foreach($docNumbers as $key=>$value) {
+					$res = $resArr[$key];
+					$document = $dms->getDocument($res["documentID"]);
 					$document->verifyLastestContentExpriry();
-				
+
 					// verify expiry
 					if ( $res["expires"] && time()>$res["expires"]+24*60*60 ){
 						if  ( $res["status"]==S_DRAFT_APP || $res["status"]==S_DRAFT_REV ){
 							$res["status"]=S_EXPIRED;
 						}
 					}
-				
+
 					print "<tr>\n";
 					$latestContent = $document->getLatestContent();
 					$docNumber = $document->getDocNum();
