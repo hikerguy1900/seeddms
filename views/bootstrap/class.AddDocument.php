@@ -138,7 +138,7 @@ $(document).ready(function() {
 
 		msg = new Array();
 		var acceptedFileTypes = ['pdf', 'doc', 'docx', 'odt', 'rtf', 'ppt', 'pptx', 'odp'];
-		var acceptedExtensions = ['txt', 'csv', 'xls', 'xlt', 'xlsm', 'xlsx', 'xlsb', 
+		var acceptedExtensions = ['txt', 'csv', 'xls', 'xlt', 'xlsm', 'xlsx', 'xlsb', 'mp4',
 						    	  'xltx', 'xltm', 'ods', 'bmp', 'gif', 'jpeg', 'jpg', 
 						    	  'png', 'tiff', 'vsd']
 

@@ -295,7 +295,7 @@ if (is_uploaded_file($_FILES["userfile"]["tmp_name"]) && $_FILES['userfile']['er
 $acceptedFileTypes = array('pdf', 'doc', 'docx', 'odt', 'rtf', 'ppt', 'pptx', 'odp');
 
 // In addition to source file types, accept spreadsheet, visio, images and text types
-$acceptedExtensions = array('txt', 'csv', 'xls', 'xlt', 'xlsm', 'xlsx', 'xlsb', 
+$acceptedExtensions = array('txt', 'csv', 'xls', 'xlt', 'xlsm', 'xlsx', 'xlsb', 'mp4',
 						    'xltx', 'xltm', 'ods', 'bmp', 'gif', 'jpeg', 'jpg', 
 						    'png', 'tiff', 'vsd');
 
