@@ -377,13 +377,24 @@ if(isset($_GET["fullsearch"]) && $_GET["fullsearch"] && $settings->_enableFullSe
 		}
 		
 		if($resArr['docs']) {
-			foreach ($resArr['docs'] as $entry) {
-				if ($entry->getAccessMode($user) >= M_READ) {
-					$entry->verifyLastestContentExpriry();
-					$entries[] = $entry;
-					$dcount++;
-				}
-			}
+                        $docCount = 0;
+                        $docNumbers = array();
+                        foreach ($resArr['docs'] as $entry) {
+                                $docNumParts = explode("-", $entry->getDocNum());
+                                $docNumbers[] = sprintf ("%s-%05d", $docNumParts[0], $docNumParts[1]);
+                                $entriesTmp[] = $entry;
+                                $docCount++;
+                        }
+                        if ($docCount != 0)  {
+                                asort($docNumbers);
+                                foreach($docNumbers as $key=>$value) {
+                                        if ($entriesTmp[$key]->getAccessMode($user) >= M_READ) {
+                                                $entriesTmp[$key]->verifyLastestContentExpriry();
+                                                $entries[] = $entriesTmp[$key];
+                                                $dcount++;
+                                        }
+                                }
+                        }
 		}
 		$totalPages = (int) (count($entries)/$limit);
 		if(count($entries)%$limit)
